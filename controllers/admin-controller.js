@@ -29,6 +29,9 @@ router.get('/',function(req,res){
 
 });
 
+router.get('/addCourses',function(req,res){
+	res.render('admin/addCourses');
+ });
 
 
 
