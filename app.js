@@ -2,6 +2,7 @@
 var express=require('express');
 var app=express();
 var loginController=require('./controllers/login-controller');
+var registrationController=require('./controllers/registration-controller');
 var adminController=require('./controllers/admin-controller');
 var studentController=require('./controllers/student-controller');
 var logoutController=require('./controllers/logout-controller');
@@ -22,11 +23,13 @@ app.engine('php', phpExpress.engine);
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(expressSession({secret:"secret",saveUninitialized:true,resave:false}));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "ext")));
 
 //Routes
 app.all(/.+\.php$/, phpExpress.router);
 app.use('/',loginController);
 app.use('/login',loginController);
+app.use('/registration',registrationController);
 app.use('/admin',adminController);
 app.use('/student',studentController);
 app.use('/logout',logoutController);
