@@ -85,5 +85,22 @@ module.exports={
 
 		});
 	},
+	searchCourse:function(data, callback)
+	{
+		var sql="SELECT * from course WHERE name like '%"+data+"%'";
+		db.getResult(sql,[],function(result){
+				callback(result);
+
+		});
+	},
+
+	searchCourse2:function(data, callback)
+	{
+		var sql="SELECT * from course WHERE name=?";
+		db.getResult(sql,[data],function(result){
+				callback(result);
+
+		});
+	},
 
 };
