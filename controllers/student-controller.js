@@ -40,7 +40,8 @@ router.get('/course',function(req,res){
       userModel.getCourse(function(result2){
         console.log(result2[0]);
         // res.render('student/index',{user:result1[0]});
-    		res.render('student/course',{user:result1[0],course:result2});
+    		// res.render('/course/index',{user:result1[0],course:result2});
+				res.render('student/course/course');
 
     	});
 		}
