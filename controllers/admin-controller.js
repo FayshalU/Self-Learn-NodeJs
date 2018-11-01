@@ -15,6 +15,7 @@ router.get('*',function(req,res,next){
 });
 
 router.get('/',function(req,res){
+
 	userModel.getAdmin(req.session.un, function(result){
 		if(result.length > 0)
 		{
@@ -30,7 +31,19 @@ router.get('/',function(req,res){
 });
 
 router.get('/addCourses',function(req,res){
-	res.render('admin/addCourses');
+
+	userModel.getAdmin(req.session.un, function(result){
+		if(result.length > 0)
+		{
+      console.log(result[0].user_id);
+			res.render('admin/addCourses', {user:result[0]});
+		}
+		else
+		{
+			res.redirect('/login');
+		}
+	});
+
  });
 
 
