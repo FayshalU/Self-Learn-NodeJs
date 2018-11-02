@@ -6,7 +6,7 @@ $(document).ready(function(){
         console.log(data);
 
         $("#ul").empty();
-        
+
         $.ajax({
           url: "/student/searchCourse/"+data,
           // data: {

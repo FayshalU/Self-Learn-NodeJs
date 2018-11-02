@@ -94,7 +94,7 @@ module.exports={
 		});
 	},
 
-	searchCourse2:function(data, callback)
+	searchCourseByName:function(data, callback)
 	{
 		var sql="SELECT * from course WHERE name=?";
 		db.getResult(sql,[data],function(result){
@@ -103,9 +103,48 @@ module.exports={
 		});
 	},
 
+	searchCourseById:function(data, callback)
+	{
+		var sql="SELECT * from course WHERE course_id=?";
+		db.getResult(sql,[data],function(result){
+				callback(result);
+
+		});
+	},
+
+	getChapterByCourseId:function(data, callback)
+	{
+		var sql="SELECT * from chapter_info WHERE course_id=?";
+		db.getResult(sql,[data],function(result){
+				// console.log(result);
+				callback(result);
+
+		});
+	},
+
+	getChapterByChapterName:function(data, callback)
+	{
+		var sql="SELECT * from chapter_info WHERE name=?";
+		db.getResult(sql,[data],function(result){
+				// console.log(result);
+				callback(result);
+
+		});
+	},
+
+	getQuizByChapterId:function(data, callback)
+	{
+		var sql="SELECT * from quiz WHERE chapter_id=?";
+		db.getResult(sql,[data],function(result){
+				// console.log(result);
+				callback(result);
+
+		});
+	},
+
 	insertCourses:function(user,callback)
 	{
-		var sql="INSERT INTO course VALUES(null,?,?)";	
+		var sql="INSERT INTO course VALUES(null,?,?)";
 		db.execute(sql,[user.coursename,user.chapter],function(result){
 				if(result)
 				{
@@ -121,7 +160,7 @@ module.exports={
 
 	// getByCourseId:function(id,callback)
 	// {
-	// 	var sql="SELECT * from course WHERE course_id=?";	
+	// 	var sql="SELECT * from course WHERE course_id=?";
 	// 	db.getResult(sql,[id],function(result){
 	// 			if(result.length>0)
 	// 			{

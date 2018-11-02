@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2018 at 09:20 AM
+-- Generation Time: Nov 02, 2018 at 10:30 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -52,6 +52,14 @@ CREATE TABLE `chapter` (
   `content` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `chapter`
+--
+
+INSERT INTO `chapter` (`chapter_id`, `content`) VALUES
+('1', 'C is a general-purpose, procedural, imperative computer programming language developed in 1972 by Dennis M. Ritchie at the Bell Telephone Laboratories to develop the UNIX operating system. C is the most widely used computer language. It keeps fluctuating at number one scale of popularity along with '),
+('2', 'C is a general-purpose, high-level language that was originally developed by Dennis M. Ritchie to develop the UNIX operating system at Bell Labs. C was originally first implemented on the DEC PDP-11 computer in 1972.\r\n\r\nIn 1978, Brian Kernighan and Dennis Ritchie produced the first publicly availabl');
+
 -- --------------------------------------------------------
 
 --
@@ -59,11 +67,20 @@ CREATE TABLE `chapter` (
 --
 
 CREATE TABLE `chapter_info` (
-  `chapter_id` varchar(50) NOT NULL,
+  `chapter_id` int(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `course_id` varchar(50) NOT NULL,
+  `content` varchar(300) NOT NULL,
   `chapter_completed` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `chapter_info`
+--
+
+INSERT INTO `chapter_info` (`chapter_id`, `name`, `course_id`, `content`, `chapter_completed`) VALUES
+(1, 'Home', '1', 'C is a general-purpose, procedural, imperative computer programming language developed in 1972 by Dennis M. Ritchie at the Bell Telephone Laboratories to develop the UNIX operating system. C is the most widely used computer language. It keeps fluctuating at number one scale of popularity along with ', 0),
+(2, 'Overview', '1', 'C is a general-purpose, high-level language that was originally developed by Dennis M. Ritchie to develop the UNIX operating system at Bell Labs. C was originally first implemented on the DEC PDP-11 computer in 1972.  In 1978, Brian Kernighan and Dennis Ritchie produced the first publicly availabl', 0);
 
 -- --------------------------------------------------------
 
@@ -86,10 +103,18 @@ CREATE TABLE `comment` (
 --
 
 CREATE TABLE `course` (
-  `course_id` varchar(50) NOT NULL,
+  `course_id` int(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `chapter` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`course_id`, `name`, `chapter`) VALUES
+(1, 'Programming Language 1', 12),
+(2, 'Programming Language 2', 10);
 
 -- --------------------------------------------------------
 
@@ -121,7 +146,8 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`id`, `password`, `type`) VALUES
 ('aa', 'aa', 'admin'),
-('bb', 'bb', 'student');
+('bb', 'bb', 'student'),
+('cc', 'cccc', 'student');
 
 -- --------------------------------------------------------
 
@@ -135,6 +161,31 @@ CREATE TABLE `post` (
   `text` varchar(50) NOT NULL,
   `time` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz`
+--
+
+CREATE TABLE `quiz` (
+  `quiz_id` int(50) NOT NULL,
+  `chapter_id` int(50) NOT NULL,
+  `question` varchar(300) NOT NULL,
+  `op1` varchar(300) NOT NULL,
+  `op2` varchar(300) NOT NULL,
+  `op3` varchar(300) NOT NULL,
+  `op4` varchar(300) NOT NULL,
+  `answer` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `quiz`
+--
+
+INSERT INTO `quiz` (`quiz_id`, `chapter_id`, `question`, `op1`, `op2`, `op3`, `op4`, `answer`) VALUES
+(1, 1, 'Which is valid C expression?', 'int my_num = 100,000;', 'int my_num = 100000;', 'int my num = 1000;', 'int $my_num = 10000;', 'op2'),
+(2, 1, 'Which among the following is NOT a logical or relational operator?', '!=', '==', '||', '=', 'op4');
 
 -- --------------------------------------------------------
 
@@ -167,7 +218,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `name`, `email`, `password`) VALUES
-('bb', 'Student1', 'student@gmail.com', 'bb');
+('bb', 'Student1', 'student@gmail.com', 'bb'),
+('cc', 'Student', 'student2@gmail.com', 'cccc');
 
 --
 -- Indexes for dumped tables
@@ -222,6 +274,12 @@ ALTER TABLE `post`
   ADD PRIMARY KEY (`post_id`);
 
 --
+-- Indexes for table `quiz`
+--
+ALTER TABLE `quiz`
+  ADD PRIMARY KEY (`quiz_id`);
+
+--
 -- Indexes for table `rank`
 --
 ALTER TABLE `rank`
@@ -232,6 +290,28 @@ ALTER TABLE `rank`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `chapter_info`
+--
+ALTER TABLE `chapter_info`
+  MODIFY `chapter_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `course`
+--
+ALTER TABLE `course`
+  MODIFY `course_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `quiz`
+--
+ALTER TABLE `quiz`
+  MODIFY `quiz_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
