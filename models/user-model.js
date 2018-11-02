@@ -132,10 +132,46 @@ module.exports={
 		});
 	},
 
+	getChapterByChapterId:function(data, callback)
+	{
+		var sql="SELECT * from chapter_info WHERE chapter_id=?";
+		db.getResult(sql,[data],function(result){
+				// console.log(result);
+				callback(result);
+
+		});
+	},
+
 	getQuizByChapterId:function(data, callback)
 	{
 		var sql="SELECT * from quiz WHERE chapter_id=?";
 		db.getResult(sql,[data],function(result){
+				// console.log(result);
+				callback(result);
+
+		});
+	},
+
+	addPost:function(id,name,str,callback)
+	{
+		var sql="INSERT INTO post VALUES(null,?,?,?)";
+		db.execute(sql,[id,name,str],function(result){
+				if(result)
+				{
+					callback(true);
+				}
+				else
+				{
+					callback(false);
+				}
+
+		});
+	},
+
+	getPost:function(callback)
+	{
+		var sql="SELECT * from post";
+		db.getResult(sql,[],function(result){
 				// console.log(result);
 				callback(result);
 

@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Student | Homepage</title>
+    <title>Student | Home</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
 
     <!-- Google Fonts
 		============================================ -->
@@ -37,7 +38,9 @@
     <!-- educate icon CSS
 		============================================ -->
     <link rel="stylesheet" href="css/educate-custon-icon.css">
-
+    <!-- morrisjs CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/morrisjs/morris.css">
     <!-- mCustomScrollbar CSS
 		============================================ -->
     <link rel="stylesheet" href="css/scrollbar/jquery.mCustomScrollbar.min.css">
@@ -52,32 +55,37 @@
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="css/responsive.css">
+    <!-- modernizr JS
+		============================================ -->
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 
 </head>
 
 <body>
-
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+    <!-- Start Left menu area -->
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header">
-
+                <a href="index.html"></a>
+                <strong><a href="index.html"></a></strong>
             </div>
             <div class="left-custom-menu-adp-wrap comment-scrollbar">
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
-                        <li class="active">
-                            <a class="has-arrow" href="index.html">
-          								   <span class="educate-icon educate-home icon-wrap"></span>
-          								   <span class="mini-click-non">Education</span>
-          								</a>
+                        <li>
+                            <a class="has-arrow" href="/student">
+            								   <span class="educate-icon educate-home icon-wrap"></span>
+            								   <span class="mini-click-non">Education</span>
+            								</a>
 
                         </li>
-
                         <li>
                             <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Courses</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Courses" href="all-courses.html"><span class="mini-sub-pro">All Courses</span></a></li>
-
+                              <li><a title="All Courses" href="student/course"><span class="mini-sub-pro">All Courses</span></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -86,15 +94,13 @@
         </nav>
     </div>
     <!-- End Left menu area -->
-
-
     <!-- Start Welcome area -->
     <div class="all-content-wrapper">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
+                        <a href="index.html"><img class="main-logo" src="" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -108,9 +114,7 @@
                                 <div class="row">
                                     <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
                                         <div class="menu-switcher-pro">
-                                            <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
-                    													<i class="educate-icon educate-nav"></i>
-                    												</button>
+
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
@@ -122,19 +126,7 @@
                                                 </li>
                                                 <li class="nav-item"><a href="student/course" class="nav-link">Courses</a>
                                                 </li>
-                                                <li class="nav-item"><a href="#" class="nav-link"></a>
-                                                </li>
 
-
-                                                <li >
-                                                  <div class="nav-item breadcome-heading">
-                                                    <form role="search" class="sr-input-func nav-item">
-                                                        <input type="text" placeholder="Search..." class="search-int form-control">
-                                                        <a href="#" class="nav-link"><i class="fa fa-search"></i></a>
-                                                    </form>
-                                                  </div>
-
-                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -145,7 +137,7 @@
 
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
-                        															<img src="img/product/pro4.jpg" alt="" />
+                        															<!-- <img src="img/product/pro4.jpg" alt="" /> -->
                         															<span class="admin-name"><%=user.name %></span>
                         															<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                         														</a>
@@ -156,12 +148,12 @@
 
                                                         <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Settings</a>
                                                         </li>
-                                                        <li><a href="/logout"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
+                                                        <li><a href="#"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
                                                         </li>
                                                     </ul>
-                                              </li>
-                                            </ul>
+                                                </li>
 
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -170,35 +162,124 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+            <!-- Mobile Menu start -->
 
+            <div class="mobile-menu-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="mobile-menu">
+                                <nav id="dropdown">
+
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu end -->
+            <div class="breadcome-area">
+                <div class="container-fluid">
+                  <h2></h2>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="breadcome-list">
+                                <div class="row">
+                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                      <div class="breadcome-heading nav-item">
+                                        <h6 style="text-align: center;font-weight: 300;height: 10px;font-size: 40px;">Timeline</h6>
+
+                                      </div>
+
+                                  </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="courses-area">
+            <div class="container-fluid">
+                <div class="row">
+
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="blog-details-inner">
+                          <div class="row">
+                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                  <div class="latest-blog-single blog-single-full-view">
+
+                                      <div class="blog-details blog-sig-details">
+
+                                        <%
+                                          for(var i=0; i< post.length; i++){ %>
+
+                                            <h1><a class="blog-ht" href="#"><%= post[i].user_name %></a></h1>
+                                            <p style="font-size: 20px;"><%= post[i].text %></p><br>
+
+                                        <% } %>
+
+                                      </div>
+                                      <div class="product-buttons">
+
+
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                      </div>
+                  </div>
+
+                </div>
+
+            </div>
+        </div>
+        <br><br><br><br><br>
+        <div class="footer-copyright-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="footer-copy-right">
+                            <p>Copyright © 2018. All rights reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <!-- jquery
 		============================================ -->
-    <script type="application/javascript" src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
 
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.sticky/1.0.4/jquery.sticky.js"></script>
+    <script src="course.js"></script>
 
     <!-- bootstrap JS
 		============================================ -->
-    <script type="application/javascript" src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <!-- wow JS
 		============================================ -->
     <script src="js/wow.min.js"></script>
-
+    <!-- price-slider JS
+		============================================ -->
+    <script src="js/jquery-price-slider.js"></script>
     <!-- meanmenu JS
 		============================================ -->
     <script src="js/jquery.meanmenu.js"></script>
     <!-- owl.carousel JS
 		============================================ -->
     <script src="js/owl.carousel.min.js"></script>
-
+    <!-- sticky JS
+		============================================ -->
+    <script src="js/jquery.sticky.js"></script>
     <!-- scrollUp JS
 		============================================ -->
     <script src="js/jquery.scrollUp.min.js"></script>
-
     <!-- mCustomScrollbar JS
 		============================================ -->
     <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -207,6 +288,16 @@
 		============================================ -->
     <script src="js/metisMenu/metisMenu.min.js"></script>
     <script src="js/metisMenu/metisMenu-active.js"></script>
+    <!-- morrisjs JS
+		============================================ -->
+    <script src="js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="js/sparkline/jquery.charts-sparkline.js"></script>
+    <script src="js/sparkline/sparkline-active.js"></script>
+
+    <!-- icheck JS
+		============================================ -->
+    <script src="js/icheck/icheck.min.js"></script>
+    <script src="js/icheck/icheck-active.js"></script>
 
 
     <!-- plugins JS
@@ -215,6 +306,8 @@
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
+
+
 
 </body>
 

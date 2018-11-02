@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2018 at 10:30 AM
+-- Generation Time: Nov 02, 2018 at 05:44 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -156,11 +156,19 @@ INSERT INTO `login` (`id`, `password`, `type`) VALUES
 --
 
 CREATE TABLE `post` (
-  `post_id` varchar(50) NOT NULL,
-  `user_id` varchar(50) NOT NULL,
-  `text` varchar(50) NOT NULL,
-  `time` varchar(50) NOT NULL
+  `post_id` int(50) NOT NULL,
+  `user_id` varchar(100) NOT NULL,
+  `user_name` varchar(50) NOT NULL,
+  `text` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `post`
+--
+
+INSERT INTO `post` (`post_id`, `user_id`, `user_name`, `text`) VALUES
+(2, 'bb', 'Student1', 'I have scored 1 on Home of Programming Language 1'),
+(3, 'cc', 'Student', 'I have scored 2 on Home of Programming Language 1');
 
 -- --------------------------------------------------------
 
@@ -184,8 +192,8 @@ CREATE TABLE `quiz` (
 --
 
 INSERT INTO `quiz` (`quiz_id`, `chapter_id`, `question`, `op1`, `op2`, `op3`, `op4`, `answer`) VALUES
-(1, 1, 'Which is valid C expression?', 'int my_num = 100,000;', 'int my_num = 100000;', 'int my num = 1000;', 'int $my_num = 10000;', 'op2'),
-(2, 1, 'Which among the following is NOT a logical or relational operator?', '!=', '==', '||', '=', 'op4');
+(1, 1, 'Which is valid C expression?', 'int my_num = 100,000;', 'int my_num = 100000;', 'int my num = 1000;', 'int $my_num = 10000;', 'int my_num = 100000;'),
+(2, 1, 'Which among the following is NOT a logical or relational operator?', '!=', '==', '||', '=', '=');
 
 -- --------------------------------------------------------
 
@@ -306,6 +314,12 @@ ALTER TABLE `chapter_info`
 --
 ALTER TABLE `course`
   MODIFY `course_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `post`
+--
+ALTER TABLE `post`
+  MODIFY `post_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `quiz`

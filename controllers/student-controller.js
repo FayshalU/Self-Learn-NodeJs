@@ -15,11 +15,18 @@ router.get('*',function(req,res,next){
 });
 
 router.get('/',function(req,res){
-	userModel.getStudent(req.session.un, function(result){
-		if(result.length > 0)
+	userModel.getStudent(req.session.un, function(result1){
+		if(result1.length > 0)
 		{
-      console.log(result[0].user_id);
-			res.render('student/index',{user:result[0]});
+			console.log(result1[0].user_id);
+
+			userModel.getPost(function(result2){
+        console.log(result2);
+        // res.render('student/index',{user:result1[0]});
+    		res.render('student/index',{user:result1[0],post:result2});
+
+    	});
+
 		}
 		else
 		{
@@ -208,7 +215,7 @@ router.get('/quiz/:data',function(req,res){
 							console.log(result5);
 
 							res.render('student/quiz',{user:result1[0],course:result4[0],quiz:result3,selectedchapter:result2[0],chapter:result5});
-							
+
 						});
 
 		    	});
@@ -216,6 +223,58 @@ router.get('/quiz/:data',function(req,res){
 
 
 	    	});
+
+    	});
+		}
+		else
+		{
+			res.redirect('/login');
+		}
+	});
+
+});
+
+router.get('/share/:data',function(req,res){
+
+	console.log(req.params);
+	var arr = req.params.data.split(',');
+	var data = arr[0];
+	var score = arr[1];
+	console.log(data);
+	console.log(score);
+
+	userModel.getStudent(req.session.un, function(result1){
+
+		if(result1.length > 0)
+		{
+      console.log(result1[0].user_id);
+
+      userModel.getChapterByChapterId(data, function(result2){
+        console.log(result2[0]);
+
+				userModel.searchCourseById(result2[0].course_id, function(result4){
+					console.log(result4);
+
+					var str = "I have scored "+score+" on "+result2[0].name+" of "+result4[0].name;
+
+					console.log(str);
+
+					userModel.addPost(result1[0].user_id,result1[0].name, str, function(result){
+	    			console.log(result);
+	          if(result){
+
+	    				res.redirect('/student');
+	          }
+	          else{
+	            error.id = 0;
+	    				res.render('login',{error});
+	          }
+	        });
+
+
+					// res.render('student/quiz',{user:result1[0],course:result4[0],quiz:result3,selectedchapter:result2[0],chapter:result5});
+
+				});
 
     	});
 		}

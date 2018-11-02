@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>All Courses</title>
+    <title>Quiz</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="/">
@@ -218,16 +218,35 @@
                           <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                   <div class="latest-blog-single blog-single-full-view">
-
+                                    <form class="" action="" method="post">
                                       <div class="blog-details blog-sig-details">
 
                                           <h1><a class="blog-ht" href="#"><%=selectedchapter.name %></a></h1>
-                                          <br><br><br>
+                                          <br>
+
+                                          <%
+                                            for(var i=0; i< quiz.length; i++){ %>
+
+                                              <label class="login2">(<%=(i+1)%>) <%=quiz[i].question%></label><br>
+
+                                              <input type="radio" name="<%=i%>" value="<%=quiz[i].op1%>"> <%=quiz[i].op1%> <br>
+                                              <input type="radio" name="<%=i%>" value="<%=quiz[i].op2%>"> <%=quiz[i].op2%> <br>
+                                              <input type="radio" name="<%=i%>" value="<%=quiz[i].op3%>"> <%=quiz[i].op3%> <br>
+                                              <input type="radio" name="<%=i%>" value="<%=quiz[i].op4%>"> <%=quiz[i].op4%> <br><br>
+
+                                              <p class="answer">Answer: <span class="<%=i%>"><%=quiz[i].answer%></span></p>
+
+                                            <% } %>
+
+                                          <br><br>
                                       </div>
                                       <div class="product-buttons">
-
-                                          <a href="/student/quiz/<%=selectedchapter.name%>"><button type="button" class="button-default cart-btn">Submit</button></a>
+                                          <span id="chapter"><%=selectedchapter.chapter_id%></span>
+                                          <p id="score"></p>
+                                          <button type="button" id="submitbtn" class="button-default cart-btn">Submit</button>
+                                          <button type="button" id="sharebtn" class="button-default cart-btn">Share</button>
                                       </div>
+                                      </form>
                                   </div>
                               </div>
                           </div>
@@ -258,7 +277,7 @@
 		============================================ -->
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
 
-    <script src="course.js"></script>
+    <script src="quiz.js"></script>
 
     <!-- bootstrap JS
 		============================================ -->
@@ -295,12 +314,25 @@
     <script src="js/sparkline/jquery.charts-sparkline.js"></script>
     <script src="js/sparkline/sparkline-active.js"></script>
 
+    <!-- icheck JS
+		============================================ -->
+    <script src="js/icheck/icheck.min.js"></script>
+    <script src="js/icheck/icheck-active.js"></script>
+
+
     <!-- plugins JS
 		============================================ -->
     <script src="js/plugins.js"></script>
     <!-- main JS
 		============================================ -->
     <script src="js/main.js"></script>
+
+    <script src="ejs.js"></script>
+
+
+    <script>
+
+    </script>
 
 
 
