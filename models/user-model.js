@@ -194,20 +194,53 @@ module.exports={
 		});
 	},
 
-	// getByCourseId:function(id,callback)
-	// {
-	// 	var sql="SELECT * from course WHERE course_id=?";
-	// 	db.getResult(sql,[id],function(result){
-	// 			if(result.length>0)
-	// 			{
-	// 				callback(result[0]);
-	// 			}
-	// 			else
-	// 			{
-	// 				callback([]);
-	// 			}
+	getByCourseName:function(name,callback)
+	{
+		var sql="SELECT * from course WHERE name=?";
+		db.getResult(sql,[name],function(result){
+				if(result.length>0)
+				{
+					callback(result[0]);
+				}
+				else
+				{
+					callback([]);
+				}
 
-	// 	});
-	// },
+		});
+	},
+
+
+	updateCourse:function(user,callback)
+	{
+		var sql="UPDATE course SET name=?,chapter=? where name=?";	
+		db.execute(sql,[user.name,user.chapter],function(result){
+				if(result)
+				{
+					callback(true);
+				}
+				else
+				{
+					callback(false);
+				}
+
+		});
+	},
+
+	deleteCourse:function(name,callback)
+	{
+		var sql="DELETE from course where name=?";	
+		db.execute(sql,[name],function(result){
+				if(result)
+				{
+					callback(true);
+				}
+				else
+				{
+					callback(false);
+				}
+
+		});
+	},
 
 };
