@@ -16,17 +16,43 @@ router.get('*',function(req,res,next){
 
 router.get('/',function(req,res){
 
-	userModel.getAdmin(req.session.un, function(result){
-		if(result.length > 0)
+	userModel.getAdmin(req.session.un, function(result1){
+		if(result1.length > 0)
 		{
-      console.log(result[0].user_id);
-			res.render('admin/index',{user:result[0]});
+			console.log(result1[0].user_id);
+
+			userModel.getPost(function(result2){
+        console.log(result2);
+        // res.render('student/index',{user:result1[0]});
+    		res.render('admin/index',{user:result1[0],post:result2});
+
+    	});
+
 		}
 		else
 		{
 			res.redirect('/login');
 		}
 	});
+
+});
+
+router.get('/profile',function(req,res){
+
+  userModel.getAdmin(req.session.un, function(result1){
+
+		if(result1.length > 0)
+		{
+      console.log(result1[0].user_id);
+
+      res.render('admin/profile',{user:result1[0]});
+		}
+		else
+		{
+			res.redirect('/login');
+		}
+	});
+
 
 });
 
@@ -39,7 +65,7 @@ router.get('/course',function(req,res){
       console.log(result1[0].user_id);
 
       userModel.getCourse(function(result2){
-        console.log(result2[0]);
+        // console.log(result2[0]);
         // res.render('student/index',{user:result1[0]});
     		res.render('admin/showCoursesAvailable',{user:result1[0],course:result2});
 
@@ -84,88 +110,41 @@ router.post('/addCourses',function(req,res){
 		}
 		else
 		{
-			res.send('Error in adding...');
+			res.redirect('/admin/course');
 		}
 	});
 });
 
-getByCourseName:function(name,callback)
-	{
-		var sql="SELECT * from course WHERE name=?";
-		db.getResult(sql,[name],function(result){
-				if(result.length>0)
-				{
-					callback(result[0]);
-				}
-				else
-				{
-					callback([]);
-				}
 
-		});
-	},
-
-
-	updateCourse:function(user,callback)
-	{
-		var sql="UPDATE course SET name=?,chapter=? where name=?";	
-		db.execute(sql,[user.name,user.chapter],function(result){
-				if(result)
-				{
-					callback(true);
-				}
-				else
-				{
-					callback(false);
-				}
-
-		});
-	},
-
-	deleteCourse:function(name,callback)
-	{
-		var sql="DELETE from course where name=?";	
-		db.execute(sql,[name],function(result){
-				if(result)
-				{
-					callback(true);
-				}
-				else
-				{
-					callback(false);
-				}
-
-		});
-	},
-
-router.get('/editCourses/:name',function(req,res){
-	var name=req.params.name;
+router.get('/editCourses/:id',function(req,res){
+	var id=req.params.id;
 	userModel.getAdmin(req.session.un, function(result){
 		if(result.length > 0)
 		{
       console.log(result[0].user_id);
-			userModel.getCourseByName(name,function(result2){
-		console.log(result2.user_id);
-		res.render('/admin/editCourses', {user:result[0]},course:result2);
-	});
+			userModel.searchCourseById(id,function(result2){
+
+				console.log(result2);
+				res.render('admin/editCourses', {user:result[0],course:result2[0]});
+			});
 		}
 		else
 		{
 			res.redirect('/login');
 		}
 	});
-	
+
 });
 
 
-<<<<<<< HEAD
 router.post('/editCourses',function(req,res){
-	var user={
-		coursename:req.body.coursename,
+	var course={
+		course_id:req.body.id,
+		name:req.body.coursename,
 		chapter:req.body.chapter
 	};
 
-	userModel.updateCourse(user,function(status){
+	userModel.updateCourse(course,function(status){
 		if(status)
 		{
 			res.redirect('/admin/course');
@@ -173,47 +152,56 @@ router.post('/editCourses',function(req,res){
 		}
 		else
 		{
-			res.send('Error in adding...');
+			res.redirect('/admin/course');
 		}
 	});
 });
 
-router.get('/delete/:name',function(req,res){
-	
-	res.render('admin/deleteCourses',{name:req.params.name});
-	
+router.get('/deleteCourses/:id',function(req,res){
+
+	var id=req.params.id;
+	userModel.getAdmin(req.session.un, function(result){
+		if(result.length > 0)
+		{
+      console.log(result[0].user_id);
+			userModel.searchCourseById(id,function(result2){
+
+				console.log(result2);
+				res.render('admin/deleteCourses', {user:result[0],course:result2[0]});
+			});
+		}
+		else
+		{
+			res.redirect('/login');
+		}
+	});
+
 });
 
-router.post('/deleteCourses/:name',function(req,res){
-	
+router.post('/deleteCourses/:id',function(req,res){
+
 	if(req.body.yes)
 	{
-		userModel.deleteCourse(req.params.name,function(status){
+		userModel.deleteCourse(req.params.id,function(status){
 			if(status)
 			{
-				res.redirect('/admin/courses');
+				res.redirect('/admin/course');
+
 			}
 			else
 			{
-				res.send('Error in deleting...');
+				res.redirect('/admin/course');
 			}
 
 		})
 	}
 	else
 	{
-		res.redirect('/admin/courses');
+		res.redirect('/admin/course');
 	}
-	
+
 });
 
-
-=======
-
-
-
-
->>>>>>> 2bf3aa0ceaba92d30165b48e88450cebe96818e2
 
 
 

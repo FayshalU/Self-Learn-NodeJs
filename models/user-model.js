@@ -226,7 +226,7 @@ module.exports={
 		});
 	},
 
-	getByCourseName:function(name,callback)
+	getCourseByName:function(name,callback)
 	{
 		var sql="SELECT * from course WHERE name=?";
 		db.getResult(sql,[name],function(result){
@@ -243,10 +243,10 @@ module.exports={
 	},
 
 
-	updateCourse:function(user,callback)
+	updateCourse:function(course,callback)
 	{
-		var sql="UPDATE course SET name=?,chapter=? where name=?";	
-		db.execute(sql,[user.name,user.chapter],function(result){
+		var sql="UPDATE course SET name=?,chapter=? where course_id=?";
+		db.execute(sql,[course.name,course.chapter,course.course_id],function(result){
 				if(result)
 				{
 					callback(true);
@@ -261,7 +261,7 @@ module.exports={
 
 	deleteCourse:function(name,callback)
 	{
-		var sql="DELETE from course where name=?";	
+		var sql="DELETE from course where course_id=?";
 		db.execute(sql,[name],function(result){
 				if(result)
 				{

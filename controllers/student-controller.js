@@ -20,6 +20,7 @@ router.get('*',function(req,res,next){
 });
 
 router.get('/',function(req,res){
+
 	userModel.getStudent(req.session.un, function(result1){
 		if(result1.length > 0)
 		{

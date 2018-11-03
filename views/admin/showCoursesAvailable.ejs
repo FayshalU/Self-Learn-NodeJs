@@ -241,13 +241,9 @@
                                   <p><span><i class="fa fa-clock"></i></span> <b>Chapter:</b> <%= course[i].chapter %></p>
                               </div>
                               <div class="button-style-three">
-<<<<<<< HEAD
-                                  <a href="/admin/editCourses/<%= course[i].name %>"><button type="button" class="btn btn-custon-rounded-three btn-warning">Edit</button></a>
-                                  <a href="/admin/deleteCourses/<%= course[i].name %>"><button type="button" class="btn btn-custon-rounded-three btn-danger">Delete</button></a>
-=======
-                                  <a href="/admin/editCourse/<%= course[i].name %>"><button type="button" class="btn btn-custon-rounded-three btn-warning">Edit</button></a>
-                                  <a href="/admin/deleteCourse/<%= course[i].name %>"><button type="button" class="btn btn-custon-rounded-three btn-danger">Delete</button></a>
->>>>>>> 2bf3aa0ceaba92d30165b48e88450cebe96818e2
+                                  <a href="/admin/editCourses/<%= course[i].course_id %>"><button type="button" class="btn btn-custon-rounded-three btn-warning">Edit</button></a>
+                                  <a href="/admin/deleteCourses/<%= course[i].course_id %>"><button type="button" class="btn btn-custon-rounded-three btn-danger">Delete</button></a>
+
                               </div>
                           </div>
                       </div>
@@ -263,6 +259,7 @@
 
             </div>
         </div>
+      </div>
         <br><br><br><br><br>
         <div class="footer-copyright-area">
             <div class="container-fluid">
@@ -276,7 +273,7 @@
             </div>
         </div>
 
-    </div>
+
 
     <!-- jquery
 		============================================ -->

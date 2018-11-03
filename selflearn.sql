@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2018 at 06:54 PM
+-- Generation Time: Nov 03, 2018 at 10:06 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `admin_id` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -38,8 +39,8 @@ CREATE TABLE `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`admin_id`, `name`, `password`) VALUES
-('aa', 'Admin1', 'aa');
+INSERT INTO `admin` (`admin_id`, `name`, `email`, `password`) VALUES
+('aa', 'Admin1', 'admin@gmail.com', 'aa');
 
 -- --------------------------------------------------------
 
@@ -115,8 +116,7 @@ CREATE TABLE `course` (
 INSERT INTO `course` (`course_id`, `name`, `chapter`) VALUES
 (1, 'Programming Language 1', 12),
 (2, 'Programming Language 2', 10),
-(4, 'New course', 5),
-(5, 'New course2', 7),
+(4, 'New course', 23),
 (6, 'Data Structure', 8),
 (8, 'Web Technologies ', 15);
 
@@ -317,7 +317,7 @@ ALTER TABLE `chapter_info`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `course_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `course_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `post`
