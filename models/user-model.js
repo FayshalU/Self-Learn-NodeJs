@@ -59,6 +59,38 @@ module.exports={
 		});
 	},
 
+	updateStudentInfo:function(user,callback)
+	{
+		var sql="Update user set name=?,email=? where user_id=?";
+		db.execute(sql,[user.name,user.email,user.userid],function(result){
+				if(result)
+				{
+					callback(true);
+				}
+				else
+				{
+					callback(false);
+				}
+
+		});
+	},
+
+	updateStudentPass:function(user,callback)
+	{
+		var sql="Update user set password=? where user_id=?";
+		db.execute(sql,[user.new,user.userid],function(result){
+				if(result)
+				{
+					callback(true);
+				}
+				else
+				{
+					callback(false);
+				}
+
+		});
+	},
+
 	getStudent:function(id,callback)
 	{
 		var sql="SELECT * from user where user_id=?";

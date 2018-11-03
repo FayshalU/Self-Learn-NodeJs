@@ -20,7 +20,7 @@ router.post('/',function(req,res){
     email:req.body.email,
 		password:req.body.password
 	};
-  var re = /^[A-Za-z]+$/;
+  var re = /^[A-Z a-z]+$/;
   var re2 = /\S+@\S+\.\S+/;
 
 	if(user.name=="")

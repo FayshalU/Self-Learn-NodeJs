@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2018 at 05:44 PM
+-- Generation Time: Nov 03, 2018 at 06:54 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -114,7 +114,11 @@ CREATE TABLE `course` (
 
 INSERT INTO `course` (`course_id`, `name`, `chapter`) VALUES
 (1, 'Programming Language 1', 12),
-(2, 'Programming Language 2', 10);
+(2, 'Programming Language 2', 10),
+(4, 'New course', 5),
+(5, 'New course2', 7),
+(6, 'Data Structure', 8),
+(8, 'Web Technologies ', 15);
 
 -- --------------------------------------------------------
 
@@ -167,7 +171,7 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`post_id`, `user_id`, `user_name`, `text`) VALUES
-(2, 'bb', 'Student1', 'I have scored 1 on Home of Programming Language 1'),
+(2, 'bb', 'Adam Levine', 'I have scored 1 on Home of Programming Language 1'),
 (3, 'cc', 'Student', 'I have scored 2 on Home of Programming Language 1');
 
 -- --------------------------------------------------------
@@ -226,7 +230,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `name`, `email`, `password`) VALUES
-('bb', 'Student1', 'student@gmail.com', 'bb'),
+('bb', 'Adam Levine', 'adam@gmail.com', 'bb'),
 ('cc', 'Student', 'student2@gmail.com', 'cccc');
 
 --
@@ -313,7 +317,7 @@ ALTER TABLE `chapter_info`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `course_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `course_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `post`

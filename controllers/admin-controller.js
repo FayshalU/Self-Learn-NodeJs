@@ -30,7 +30,29 @@ router.get('/',function(req,res){
 
 });
 
+router.get('/course',function(req,res){
 
+  userModel.getAdmin(req.session.un, function(result1){
+
+		if(result1.length > 0)
+		{
+      console.log(result1[0].user_id);
+
+      userModel.getCourse(function(result2){
+        console.log(result2[0]);
+        // res.render('student/index',{user:result1[0]});
+    		res.render('admin/showCoursesAvailable',{user:result1[0],course:result2});
+
+    	});
+		}
+		else
+		{
+			res.redirect('/login');
+		}
+	});
+
+
+});
 
 router.get('/addCourses',function(req,res){
 
@@ -57,7 +79,7 @@ router.post('/addCourses',function(req,res){
 	userModel.insertCourses(user,function(status){
 		if(status)
 		{
-			res.redirect('/admin/showAvailableCourses');
+			res.redirect('/admin/course');
 
 		}
 		else
@@ -70,10 +92,10 @@ router.post('/addCourses',function(req,res){
 
 
 
-		
-	
 
- 
+
+
+
 
 
 

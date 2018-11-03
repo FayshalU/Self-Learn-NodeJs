@@ -2,6 +2,11 @@ var express=require('express');
 var router=express.Router();
 var userModel=require.main.require('./models/user-model');
 
+var error={
+	id: 0,
+	status:1
+};
+
 router.get('*',function(req,res,next){
 	if(req.session.un==null)
 	{
@@ -33,6 +38,164 @@ router.get('/',function(req,res){
 			res.redirect('/login');
 		}
 	});
+
+});
+
+router.get('/profile',function(req,res){
+
+  userModel.getStudent(req.session.un, function(result1){
+
+		if(result1.length > 0)
+		{
+      console.log(result1[0].user_id);
+			error.id = 0;
+
+      res.render('student/profile',{user:result1[0],error});
+		}
+		else
+		{
+			res.redirect('/login');
+		}
+	});
+
+
+});
+
+router.post('/edit',function(req,res){
+
+	userModel.getStudent(req.session.un, function(result1){
+
+		if(result1.length > 0)
+		{
+      console.log(result1[0].user_id);
+			error.id = 0;
+
+			var user={
+		    name:req.body.name,
+		    email:req.body.email,
+				userid:req.session.un
+			};
+		  var re = /^[A-Z a-z]+$/;
+		  var re2 = /\S+@\S+\.\S+/;
+
+			if(user.name=="")
+			{
+				//EMPTY:::::::::::::::;
+				error.id = 3;
+				console.log(error);
+				res.render('student/profile',{user:result1[0],error});
+			}
+		  else if(!re.test(user.name))
+			{
+				error.id = 4;
+				console.log(error);
+				res.render('student/profile',{user:result1[0],error});
+			}
+		  else if(user.email=="")
+			{
+				//EMPTY:::::::::::::::;
+				error.id = 7;
+				// console.log(error);
+				res.render('student/profile',{user:result1[0],error});
+			}
+		  else if(!re2.test(user.email))
+			{
+				error.id = 8;
+				// console.log(error);
+				res.render('student/profile',{user:result1[0],error});
+			}
+			else{
+				error.id = 13;
+
+				userModel.updateStudentInfo(user,function(result){
+					console.log(result);
+					if(result){
+
+						res.render('student/profile',{user:result1[0],error});
+					}
+					else{
+						error.id = 0;
+						res.render('login',{error});
+					}
+				});
+
+			}
+		}
+		else
+		{
+			res.redirect('/login');
+		}
+	});
+
+
+});
+
+router.post('/editpass',function(req,res){
+
+	userModel.getStudent(req.session.un, function(result1){
+
+		if(result1.length > 0)
+		{
+      console.log(result1[0].user_id);
+			error.id = 0;
+
+			var user={
+		    current:req.body.current,
+		    new:req.body.new,
+				userid:req.session.un
+			};
+
+			if(user.current=="")
+			{
+				//EMPTY:::::::::::::::;
+				error.id = 11;
+				console.log(error);
+				res.render('student/profile',{user:result1[0],error});
+			}
+
+			else if(result1[0].password != user.current){
+				error.id = 12;
+				console.log(error);
+				res.render('student/profile',{user:result1[0],error});
+			}
+
+			else if(user.new=="")
+			{
+				//EMPTY:::::::::::::::;
+				error.id = 9;
+				console.log(error);
+				res.render('student/profile',{user:result1[0],error});
+			}
+		  else if(user.new.length<4)
+			{
+				error.id = 10;
+				console.log(error);
+				res.render('student/profile',{user:result1[0],error});
+			}
+
+			else{
+				error.id = 14;
+
+				userModel.updateStudentPass(user,function(result){
+					console.log(result);
+					if(result){
+
+						res.render('student/profile',{user:result1[0],error});
+					}
+					else{
+						error.id = 0;
+						res.render('login',{error});
+					}
+				});
+
+			}
+		}
+		else
+		{
+			res.redirect('/login');
+		}
+	});
+
 
 });
 

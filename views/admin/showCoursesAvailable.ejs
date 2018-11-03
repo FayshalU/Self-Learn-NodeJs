@@ -115,11 +115,11 @@
                                     <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
                                         <div class="header-top-menu tabl-d-n">
                                             <ul class="nav navbar-nav mai-top-nav">
-                                                <li class="nav-item"><a href="/admin/index" class="nav-link">Home</a>
+                                                <li class="nav-item"><a href="#" class="nav-link">Home</a>
                                                 </li>
                                                 <li class="nav-item"><a href="#" class="nav-link">About</a>
                                                 </li>
-                                                <li class="nav-item"><a href="/admin/showCoursesAvailable" class="nav-link">Courses</a>
+                                                <li class="nav-item"><a href="#" class="nav-link">Courses</a>
                                                 </li>
 
                                             </ul>
@@ -158,7 +158,6 @@
                 </div>
             </div>
             <!-- Mobile Menu start -->
-
             <div class="mobile-menu-area">
                 <div class="container">
                     <div class="row">
@@ -173,6 +172,7 @@
                 </div>
             </div>
 
+
             <!-- Mobile Menu end -->
             <div class="breadcome-area">
                 <div class="container-fluid">
@@ -183,13 +183,26 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="breadcome-heading nav-item">
                                           <form method="post" action="/student/showCourse">
+                                            <input type="text" name="src" id="search" placeholder="Search..." class="" >
+                                            <a href="" id="srcbtn" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"></a>
+                                            <button type="submit" name="button"><i class="fa fa-search"></i></button>
 
+                                            <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn" id="ul">
+
+                                            </ul>
                                           </form>
 
                                         </div>
 
                                     </div>
-
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <ul class="breadcome-menu">
+                                            <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                                            </li>
+                                            <li><span class="bread-blod">All Courses</span>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -201,20 +214,31 @@
             <div class="container-fluid">
                 <div class="row">
 
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="courses-inner res-mg-b-30">
-                            <div class="courses-title">
-                                <h2><%= course.name %></h2>
-                            </div>
+                  <%
+                    for(var i=0; i< course.length; i++){ %>
 
-                            <div class="course-des">
-                                <p><span><i class="fa fa-clock"></i></span> <b>Chapter:</b> <%= course.chapter %></p>
-                            </div>
-                            <div class="product-buttons">
-                                <button type="button" class="button-default cart-btn">Read More</button>
-                            </div>
-                        </div>
-                    </div>
+                      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                          <div class="courses-inner res-mg-b-30">
+                              <div class="courses-title">
+                                  <h2><%= course[i].name %></h2>
+                              </div>
+
+                              <div class="course-des">
+                                  <p><span><i class="fa fa-clock"></i></span> <b>Chapter:</b> <%= course[i].chapter %></p>
+                              </div>
+                              <div class="button-style-three">
+                                  <a href="/admin/editCourse/<%= course[i].name %>"><button type="button" class="btn btn-custon-rounded-three btn-warning">Edit</button></a>
+                                  <a href="/admin/deleteCourse/<%= course[i].name %>"><button type="button" class="btn btn-custon-rounded-three btn-danger">Delete</button></a>
+                              </div>
+                          </div>
+                      </div>
+
+                    <% } %>
+
+
+
+
+
 
                 </div>
 
