@@ -89,54 +89,7 @@ router.post('/addCourses',function(req,res){
 	});
 });
 
-getByCourseName:function(name,callback)
-	{
-		var sql="SELECT * from course WHERE name=?";
-		db.getResult(sql,[name],function(result){
-				if(result.length>0)
-				{
-					callback(result[0]);
-				}
-				else
-				{
-					callback([]);
-				}
 
-		});
-	},
-
-
-	updateCourse:function(user,callback)
-	{
-		var sql="UPDATE course SET name=?,chapter=? where name=?";	
-		db.execute(sql,[user.name,user.chapter],function(result){
-				if(result)
-				{
-					callback(true);
-				}
-				else
-				{
-					callback(false);
-				}
-
-		});
-	},
-
-	deleteCourse:function(name,callback)
-	{
-		var sql="DELETE from course where name=?";	
-		db.execute(sql,[name],function(result){
-				if(result)
-				{
-					callback(true);
-				}
-				else
-				{
-					callback(false);
-				}
-
-		});
-	},
 
 router.get('/editCourses/:name',function(req,res){
 	var name=req.params.name;
@@ -158,7 +111,6 @@ router.get('/editCourses/:name',function(req,res){
 });
 
 
-<<<<<<< HEAD
 router.post('/editCourses',function(req,res){
 	var user={
 		coursename:req.body.coursename,
@@ -178,7 +130,7 @@ router.post('/editCourses',function(req,res){
 	});
 });
 
-router.get('/delete/:name',function(req,res){
+router.get('/deleteCourses/:name',function(req,res){
 	
 	res.render('admin/deleteCourses',{name:req.params.name});
 	
@@ -207,13 +159,24 @@ router.post('/deleteCourses/:name',function(req,res){
 	
 });
 
+router.get('/addChapter',function(req,res){
 
-=======
+	userModel.getAdmin(req.session.un, function(result){
+		if(result.length > 0)
+		{
+      console.log(result[0].user_id);
+			res.render('admin/addChapter', {user:result[0]});
+		}
+		else
+		{
+			res.redirect('/login');
+		}
+	});
+
+ });
 
 
 
-
->>>>>>> 2bf3aa0ceaba92d30165b48e88450cebe96818e2
 
 
 
