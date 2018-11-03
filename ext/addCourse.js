@@ -1,6 +1,26 @@
 $(document).ready(function(){
   console.log("ready");
 
+  for (var i = 1; i <= 20; i++) {
+    $("#chapter"+i).hide();
+  }
+
+  $("#chapter").on('change', function (){
+
+      var chapter = parseInt($("#chapter").val());
+      console.log(chapter);
+
+      for (var i = 1; i <= 20; i++) {
+        $("#chapter"+i).hide();
+      }
+
+      for (var i = 1; i <= chapter; i++) {
+        $("#chapter"+i).show();
+      }
+
+
+    });
+
 
 
 });
@@ -32,19 +52,12 @@ function checkName(){
 
 function checkChapter(){
 
-    var re = /^[0-9]+$/;
-
     var data = $("#chapter").val();
     if(!isValid){
       return;
     }
-    else if(data == ""){
-        $("#h2").text("Chapter can't be empty");
-        $("#h2").show();
-        isValid = false;
-    }
-    else if(!re.test(data)){
-        $("#h2").text("Invalid input");
+    else if(data == "0"){
+        $("#h2").text("Select number of chapters");
         $("#h2").show();
         isValid = false;
     }

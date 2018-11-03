@@ -97,15 +97,47 @@ router.get('/addCourses',function(req,res){
  });
 
 router.post('/addCourses',function(req,res){
-	var user={
+	var course={
 		coursename:req.body.coursename,
 		chapter:req.body.chapter
 	};
 
-	userModel.insertCourses(user,function(status){
+	userModel.insertCourses(course,function(status){
 		if(status)
 		{
+
 			res.redirect('/admin/course');
+
+			// userModel.getCourseByName(course.coursename, function(result){
+			// 	if(result.length > 0)
+			// 	{
+			//       console.log(result[0].course_id);
+			//
+			// 			for (var i = 1; i <= parseInt(chapter); i++) {
+			//
+			// 				var data={
+			// 					name:req.body."chapter"+(i.toString())+"Name",
+			// 					content:req.body."chapter"+(i.toString())+"Content",
+			// 					course_id:result[0].course_id
+			// 				}
+			//
+			// 				userModel.insertChapter(data,function(status){
+			// 					if(status){
+			// 						res.redirect('/admin/course');
+			// 					}
+			// 					else {
+			// 						res.redirect('/admin/course');
+			// 					}
+			//
+			// 				});
+			// 			}
+			//
+			// 	}
+			// 	else
+			// 	{
+			// 		res.redirect('/admin/course');
+			// 	}
+			// });
 
 		}
 		else

@@ -226,6 +226,38 @@ module.exports={
 		});
 	},
 
+	insertCourses:function(user,callback)
+	{
+		var sql="INSERT INTO course VALUES(null,?,?)";
+		db.execute(sql,[user.coursename,user.chapter],function(result){
+				if(result)
+				{
+					callback(true);
+				}
+				else
+				{
+					callback(false);
+				}
+
+		});
+	},
+
+	insertChapter:function(data,callback)
+	{
+		var sql="INSERT INTO chapter_info VALUES(null,?,?,?)";
+		db.execute(sql,[data.name,data.course_id,data.content],function(result){
+				if(result)
+				{
+					callback(true);
+				}
+				else
+				{
+					callback(false);
+				}
+
+		});
+	},
+
 	getCourseByName:function(name,callback)
 	{
 		var sql="SELECT * from course WHERE name=?";
