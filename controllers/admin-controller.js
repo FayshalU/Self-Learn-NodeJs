@@ -111,6 +111,7 @@ router.get('/editCourses/:name',function(req,res){
 });
 
 
+<<<<<<< HEAD
 router.post('/editCourses',function(req,res){
 	var user={
 		coursename:req.body.coursename,
@@ -160,6 +161,12 @@ router.post('/deleteCourses/:name',function(req,res){
 });
 
 
+=======
+
+
+
+
+>>>>>>> 2bf3aa0ceaba92d30165b48e88450cebe96818e2
 
 
 
